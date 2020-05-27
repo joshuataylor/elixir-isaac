@@ -1,7 +1,9 @@
 defmodule Mix.Tasks.Compile.Isaac do
+  use Mix.Task
 
   @shortdoc "Compiles Isaac"
 
+  @impl Mix.Task
   def run(_) do
     if match? {:win32, _}, :os.type do
       {result, _error_code} = System.cmd("nmake", ["/F", "Makefile.win", "priv\\markdown.dll"], stderr_to_stdout: true)
@@ -22,9 +24,9 @@ defmodule Isaac.Mixfile do
      version: "0.0.1",
      elixir: "~> 1.0",
      compilers: [:isaac, :elixir, :app],
-     description: description,
-     package: package,
-     deps: deps]
+     description: description(),
+     package: package(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application
